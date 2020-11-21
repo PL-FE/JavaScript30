@@ -1,25 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>JS + CSS Clock</title>
-</head>
-<body>
-
-
-    <div class="clock">
-      <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
-      </div>
-    </div>
-
 
   <style>
     html {
-      background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
-      background-size: cover;
       font-family: 'helvetica neue';
       text-align: center;
       font-size: 10px;
@@ -35,40 +22,134 @@
     }
 
     .clock {
-      width: 30rem;
-      height: 30rem;
+      width: 420px;
+      height: 420px;
       border: 20px solid white;
       border-radius: 50%;
       margin: 50px auto;
       position: relative;
+      z-index: 1;
       padding: 2rem;
       box-shadow:
-        0 0 0 4px rgba(0,0,0,0.1),
+        0 0 0 4px rgba(0, 0, 0, 0.1),
         inset 0 0 0 3px #EFEFEF,
         inset 0 0 10px black,
-        0 0 10px rgba(0,0,0,0.2);
+        0 0 10px rgba(0, 0, 0, 0.2);
+      background-color: #f5f5f5;
     }
 
     .clock-face {
       position: relative;
       width: 100%;
       height: 100%;
-      transform: translateY(-3px); /* account for the height of the clock hands */
+      transform: translateY(-3px);
+      /* account for the height of the clock hands */
     }
 
     .hand {
-      width: 50%;
       height: 6px;
+      width: 50%;
+      top: 50%;
+      right: 40%;
       background: black;
       position: absolute;
-      top: 50%;
+      transform: rotate(90deg);
+      transform-origin: 80%;
     }
 
+    .second-hand {
+      background-color: red;
+    }
+
+    .hour-hand {
+      width: 40%;
+      right: 42%;
+    }
+
+    .progress {
+      position: fixed;
+      bottom: 0;
+      height: 100vh;
+      width: 100%;
+      background-color: #ddd;
+    }
+
+    .skills {
+      text-align: right;
+      line-height: 40px;
+      color: white;
+      height: 100%;
+      background-color: #bf9240;
+      width: 0;
+      transition: width 1s;
+    }
   </style>
 
-  <script>
+</head>
 
+<body>
+
+  <div class="clock">
+    <div class="clock-face">
+      <div class="hand hour-hand"></div>
+      <div class="hand min-hand"></div>
+      <div class="hand second-hand"></div>
+    </div>
+  </div>
+
+  <div class="progress">
+    <div class="skills"></div>
+  </div>
+  <script>
+    const secondHand = document.querySelector(".second-hand");
+    const minuteHand = document.querySelector(".min-hand");
+    const hourHand = document.querySelector(".hour-hand");
+
+    function setDate() {
+      const now = new Date();
+
+      const second = now.getSeconds();
+      const secondDegree = ((second / 60) * 360) + 90;
+
+      const minute = now.getMinutes();
+      const minuteDegree = ((minute / 60) * 360) + 90;
+
+      const hour = now.getHours();
+      const hourDegree = ((hour / 12) * 360) + ((minute / 60) * 30) + 90;
+
+      secondHand.style.transform = `rotate(${secondDegree}deg)`;
+      minuteHand.style.transform = `rotate(${minuteDegree}deg)`;
+      hourHand.style.transform = `rotate(${hourDegree}deg)`;
+
+      //fix transition bug
+      if (secondDegree === 90) {
+        secondHand.style.transition = "all 0s";
+      }
+      else {
+        secondHand.style.transition = "all 1s";
+      }
+
+      if (minuteDegree === 90) {
+        minuteHand.style.transition = "all 0s";
+      }
+      else {
+        minuteHand.style.transition = "all 1s";
+      }
+
+      setProgress()
+    }
+
+    setInterval(setDate, 1000);
+
+    function setProgress() {
+      const oneDay = 24 * 60 * 60 * 1000
+      let now = new Date()
+      const finishTime = now - new Date().setHours(0, 0, 0, 0)
+      const secondHand = document.querySelector(".skills");
+      secondHand.style.width = (finishTime * 100 / oneDay).toFixed(2) + 1 + '%'
+    }
 
   </script>
 </body>
+
 </html>
