@@ -108,7 +108,7 @@
       if (isInitBg) return
       const bg = document.querySelector('#bg')
       bg.play()
-      bg.volume = 0.4;
+      bg.volume = 0.6;
       isInitBg = true
     }
 
@@ -116,8 +116,6 @@
     document.addEventListener("keypress", playSound);
     document.addEventListener("transitionend", removeStyle);
     keys.forEach((key) => key.addEventListener("click", clickSound));
-    console.log('keys', keys)
-
   </script>
 </body>
 
