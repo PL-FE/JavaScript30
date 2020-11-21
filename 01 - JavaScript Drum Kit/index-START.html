@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>JS Drum Kit</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-
-
+  <audio id="bg" autoplay="autoplay" loop="loop">
+    <source src="sounds/雨先案内人.mp3" type="audio/mp3">
+  </audio>
   <div class="keys">
     <div data-key="65" class="key">
       <kbd>A</kbd>
@@ -57,10 +60,65 @@
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
-<script>
+  <div class="bg-info">
+    <p> BGM - おひさま</p>
+    <p>TV动画《男子高校生的日常》ED / TVアニメ「男子高校生の日常」</p>
+  </div>
 
-</script>
+  <script>
+    const keys = document.querySelectorAll(".key");
+    let isInitBg = false
+    const playSound = (e) => {
+      const code = e.keyCode > 90 ? e.keyCode - 32 : e.keyCode
+      const audio = document.querySelector(
+        `audio[data-key="${code}"]`
+      );
+      const key = document.querySelector(
+        `.key[data-key="${code}"]`
+      );
 
+      if (!audio) return;
+      initBg()
 
+      audio.currentTime = 0;
+      audio.play();
+      audio.volume = 0.4;
+      key.classList.add("playing");
+    };
+
+    function clickSound() {
+      const audio = document.querySelector(
+        `audio[data-key="${this.dataset.key}"]`
+      );
+
+      if (!audio) return;
+      initBg()
+      audio.currentTime = 0;
+      audio.play();
+      audio.volume = 0.4;
+      this.classList.add("playing");
+    }
+
+    function removeStyle(e) {
+      if (e.type !== "transitionend") return;
+      e.target.classList.remove("playing");
+    }
+
+    function initBg() {
+      if (isInitBg) return
+      const bg = document.querySelector('#bg')
+      bg.play()
+      bg.volume = 0.4;
+      isInitBg = true
+    }
+
+    // KeyPress主要用来接收字母
+    document.addEventListener("keypress", playSound);
+    document.addEventListener("transitionend", removeStyle);
+    keys.forEach((key) => key.addEventListener("click", clickSound));
+    console.log('keys', keys)
+
+  </script>
 </body>
+
 </html>
