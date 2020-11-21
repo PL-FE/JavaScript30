@@ -1,26 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Scoped CSS Variables and JS</title>
 </head>
+
 <body>
   <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
 
   <div class="controls">
     <label for="spacing">Spacing:</label>
-    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+    <input id="spacing" type="range" name="spacing" min="10" max="200" value="50" data-sizing="px">
 
-    <label for="blur">Blur:</label>
-    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+    <label for="borderRadius">Radius:</label>
+    <input id="borderRadius" type="range" name="borderRadius" min="0" max="100" value="40" data-sizing="%">
 
-    <label for="base">Base Color</label>
+    <label for="filter">Filter: </label>
+    <select name="filter">
+      <option value="unset">none</option>
+      <option value="blur(4px)">blur(4px)</option>
+      <option value="brightness(250%)">brightness(250%)</option>
+      <option value="contrast(180%)">contrast(180%)</option>
+      <option value="grayscale(100%)">grayscale(100%)</option>
+      <option value="hue-rotate(180deg)">hue-rotate(180deg)</option>
+      <option value="invert(100%)">invert(100%)</option>
+      <option value="opacity(50%)">opacity(50%)</option>
+      <option value="saturate(7)">saturate(7)</option>
+      <option value="sepia(100%)">sepia(100%)</option>
+      <option value="drop-shadow(8px 8px 10px green)">drop-shadow(8px 8px 10px green)</option>
+    </select>
+
+    <label for="base">Base Color: </label>
     <input id="base" type="color" name="base" value="#ffc600">
+
   </div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+  <img src="三颗星彩色冒险.jpg" width="800px">
+
+  <div class="bg-info">
+    <p>图片来自： 《三颗星彩色冒险》</p>
+  </div>
 
   <style>
+    :root {
+      --base: #ffc600;
+      --spacing: 50px;
+      --filter: unset;
+      --borderRadius: 40%;
+    }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: var(--filter);
+      border-radius: var(--borderRadius);
+    }
+
+    .hl {
+      color: var(--base);
+    }
 
     /*
       misc styles, nothing to do with CSS variables
@@ -42,10 +81,34 @@
     input {
       width: 100px;
     }
+
+    select {
+      height: 27px;
+    }
+
+    .bg-info {
+      position: fixed;
+      bottom: 0;
+      padding: 10px;
+      font-size: 14px;
+    }
   </style>
 
   <script>
+    const inputs = document.querySelectorAll('.controls input');
+    const selects = document.querySelectorAll('.controls select');
+
+    function handleUpdate() {
+      const suffix = this.dataset.sizing || '';
+      console.log('1', this.value + suffix)
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    }
+
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+    selects.forEach(select => select.addEventListener('change', handleUpdate));
   </script>
 
 </body>
+
 </html>
