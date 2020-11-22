@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Array Cardio 💪</title>
 </head>
+
 <body>
   <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
+  <div id="blah"></div>
   <script>
     // Get your shorts on - this is an array workout!
     // ## Array Cardio Day 1
@@ -34,32 +37,69 @@
       'Berne, Eric', 'Berra, Yogi', 'Berry, Wendell', 'Bevan, Aneurin', 'Ben-Gurion, David', 'Bevel, Ken', 'Biden, Joseph', 'Bennington, Chester', 'Bierce, Ambrose',
       'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
     ];
-    
+
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    console.log("1. Filter the list of inventors for those who were born in the 1500's");
+    const year15 = inventors.filter(({ year }) => year <= 1600 && year >= 1500)
+    console.table(year15)
+    console.log('--------------------------------------------------------------------------')
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    console.log('2. Give us an array of the inventors first and last names');
+    const names = inventors.map(({ first, last }) => `${first} ${last}`)
+    console.log(names)
+    console.log('--------------------------------------------------------------------------')
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    console.log('3. Sort the inventors by birthdate, oldest to youngest');
+    const ordered = inventors.sort((a, b) => a.year - b.year)
+    console.table(ordered);
+    console.log('--------------------------------------------------------------------------')
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    console.log('4. How many years did all the inventors live all together?');
+    const totalYears = inventors.reduce((pre, cur) => pre + (cur.passed - cur.year), 0)
+    console.log('totalYears', totalYears)
+    console.log('--------------------------------------------------------------------------')
 
     // 5. Sort the inventors by years lived
+    console.log('5. Sort the inventors by years lived');
+    const oldest = inventors.sort((a, b) => (b.passed - b.year) - (a.passed - a.year))
+    console.table(oldest)
+    console.log('--------------------------------------------------------------------------')
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    console.log(`6. create a list of Boulevards in Paris that contain 'de' anywhere in the name`)
+    console.warn('TODO:')
+    console.log('--------------------------------------------------------------------------')
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    console.log(' 7. Sort the people alphabetically by last name');
+    const alpha = people.sort((lastOne, nextOne) => {
+      const aLast = lastOne.split(', ')[0];
+      const bLast = nextOne.split(', ')[0];
+      return aLast < bLast ? -1 : 1
+    });
+    console.log(alpha);
+    console.log('--------------------------------------------------------------------------')
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
-    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    console.log('8. Sum up the instances of each of these')
+    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck'];
+    const transportation = data.reduce((pre, cur) => {
+      pre[cur] = pre[cur] ? pre[cur] + 1 : 1
+      return pre
+    }, {})
 
+    console.table('transportation', transportation)
   </script>
 </body>
+
 </html>
