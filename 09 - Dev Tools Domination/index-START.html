@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Console Tricks!</title>
 </head>
+
 <body>
 
   <p onClick="makeGreen()">×BREAK×DOWN×</p>
@@ -18,29 +20,59 @@
     }
 
     // Regular
+    console.log('常规')
 
     // Interpolated
+    console.log("格式说明,  %s", 'Interpolated');
 
     // Styled
+    console.log('%c 自定义样式', 'background-color: green; color: yellow;font-size:30px;')
 
     // warning!
+    console.warn('这个一条警告信息！')
 
     // Error :|
+    console.error('这个一条错误信息！')
 
     // Info
+    console.info('这个一条信息！')
 
     // Testing
+    // 一个布尔表达式。如果assertion为假，消息将会被输出到控制台之中。
+    console.assert(1 === 1, '这是真的不会输出')
+    console.assert(1 === 2, '断言：这是假的会输出')
 
     // clearing
+    // console.clear(); 
 
     // Viewing DOM Elements
+    const p = document.querySelector('p');
+    console.log(p);
+    console.dir(p);
 
     // Grouping together
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+
+      console.groupEnd(`${dog.name}`);
+    });
 
     // counting
+    console.count('label')
+    console.count('label')
+    console.count('label')
+    console.countReset('label')
+    console.count('label')
+    console.count('label')
 
     // timing
-
+    console.time('fetching data');
+    setTimeout(() => {
+      console.timeEnd('fetching data');
+    }, 1000);
   </script>
 </body>
+
 </html>
