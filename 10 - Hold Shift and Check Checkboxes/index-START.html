@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Hold Shift to Check Multiple Checkboxes</title>
 </head>
+
 <body>
   <style>
-
     html {
       font-family: sans-serif;
       background: #ffc600;
+      user-select: none;
     }
 
     .inbox {
@@ -17,7 +19,7 @@
       margin: 50px auto;
       background: white;
       border-radius: 5px;
-      box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+      box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
     }
 
     .item {
@@ -30,7 +32,7 @@
       border-bottom: 0;
     }
 
-    input:checked + p {
+    input:checked+p {
       background: #F9F9F9;
       text-decoration: line-through;
     }
@@ -44,13 +46,17 @@
       padding: 20px;
       transition: background 0.2s;
       flex: 1;
-      font-family:'helvetica neue';
+      font-family: 'helvetica neue';
       font-size: 20px;
       font-weight: 200;
       border-left: 1px solid #D1E2FF;
     }
+
+    .title {
+      text-align: center;
+    }
   </style>
-   <!--
+  <!--
    The following is a common layout you would see in an email client.
 
    When a user clicks a checkbox, holds Shift, and then clicks another checkbox a few rows down, all the checkboxes inbetween those two checkboxes should be checked.
@@ -93,9 +99,36 @@
       <input type="checkbox">
       <p>Don't forget to tweet your result!</p>
     </div>
-  </div>
 
-<script>
-</script>
+  </div>
+  <h3 class="title">试试滑动选择✌</h3>
+
+  <script>
+    let isMousedown = false
+    let flag = null
+    const inbox = document.querySelector('.inbox')
+    inbox.onmousedown = handleMousedown
+    inbox.onmousemove = handleOnmousemove
+    inbox.onmouseup = handleMouseup
+
+    function handleMousedown(e) {
+      isMousedown = true
+      flag = null
+    }
+    function handleOnmousemove(e) {
+      if (!isMousedown) return
+      const input = e.path.find(it => it.className === 'item')
+      const checkbox = input.querySelector('input')
+
+      if (flag !== input) {
+        checkbox.checked = !checkbox.checked
+        flag = input
+      }
+    }
+    function handleMouseup(e) {
+      isMousedown = false
+    }
+  </script>
 </body>
+
 </html>
