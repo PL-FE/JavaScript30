@@ -12,6 +12,7 @@
       Fish SVG Cred:
       https://thenounproject.com/search/?q=fish&i=589236
    -->
+  <div class="reset" onclick="reset()">重置🎭</div>
 
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"
     viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
@@ -34,7 +35,6 @@
     <h2>LOCAL TAPAS</h2>
     <p></p>
     <ul class="plates">
-      <li>Loading Tapas...</li>
     </ul>
     <form class="add-items">
       <input type="text" name="item" placeholder="Item Name" required>
@@ -45,26 +45,43 @@
   <script>
     const addItems = document.querySelector('.add-items');
     const itemsList = document.querySelector('.plates');
-    const items = JSON.parse(localStorage.getItem('items')) || [];
+    let items = JSON.parse(localStorage.getItem('items')) || [];
 
     function addItem(e) {
       e.preventDefault()
-      const value = addItems.querySelector('[name=item]').value
-      items.push(value)
+      const text = addItems.querySelector('[name=item]').value
+      const item = {
+        text,
+        done: false
+      };
+      items.push(item)
       localStorage.setItem('items', JSON.stringify(items));
       populateList(items, itemsList)
     }
 
     function populateList(plates = [], platesList) {
-      platesList.innerHTML = plates.map(it => {
+      platesList.innerHTML = plates.map((plate, i) => {
         return `
-        <li>${it}}</li>
-        `
-      }).join('')
+        <li>
+          <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
+          <label for="item${i}">${plate.text}</label>
+        </li>
+      `;
+      }).join('');
     }
 
     addItems.addEventListener('submit', addItem)
 
+    function reset() {
+      localStorage.clear();
+      items = []
+      const itemsList = document.querySelector('.plates');
+      itemsList.innerHTML = ` `
+      document.querySelector('[name=item]').value = ''
+    }
+  </script>
+
+  <script>
   </script>
 
 
