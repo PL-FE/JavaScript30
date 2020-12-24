@@ -1,19 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Speech Detection</title>
 </head>
-<body>
 
+<body>
+  <div class="toolBar">
+    <button onclick="handleRecording()" id="recording">语音识别</button>
+    <button onclick="handleReading()">文字朗读</button>
+  </div>
   <div class="words" contenteditable>
   </div>
 
-<script>
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  <div class="" id="waves">
+  </div>
+
+  <script>
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recording = document.querySelector('#recording')
+    let isRecording = false
+
+    document.execCommand("defaultParagraphSeparator", false, "p");
+    const waves = document.querySelector('#waves')
+    const recognition = new SpeechRecognition();
+    recognition.interimResults = true;
+    recognition.lang = 'zh-CN';
+
+    let p = document.createElement('p');
+    const words = document.querySelector('.words');
+    words.appendChild(p);
 
 
-</script>
+    recognition.addEventListener('result', e => {
+      const transcript = Array.from(e.results)
+        .map(result => result[0])
+        .map(result => result.transcript)
+        .join('');
+
+      const poopScript = transcript.replace(/屎|大便/gi, '💩').replace(/操/gi, '🍌');
+      p.textContent = poopScript;
+      if (e.results[0].isFinal) {
+        p = document.createElement('p');
+        words.appendChild(p);
+      }
+    });
+
+    recognition.addEventListener('end', recordingEnd);
+
+    function recordingEnd() {
+      waves.classList.remove('waves')
+      isRecording = false
+      recording.innerHTML = '语音识别'
+    }
+
+    function handleRecording() {
+      if (isRecording) return
+      waves.classList.add('waves')
+      recording.innerHTML = '正在录音'
+      recognition.start();
+      isRecording = true
+    }
+
+
+    function handleReading() {
+      words.childNodes.forEach(node => {
+        let m = node.innerHTML || node.nodeValue
+        if (m) {
+          var msg = new SpeechSynthesisUtterance(m);
+          window.speechSynthesis.speak(msg);
+        }
+      })
+
+    }
+
+  </script>
 
 
   <style>
@@ -22,6 +84,7 @@
     }
 
     body {
+      overflow: hidden;
       background: #ffc600;
       font-family: 'helvetica neue';
       font-weight: 200;
@@ -30,17 +93,17 @@
 
     .words {
       max-width: 500px;
-      margin: 50px auto;
+      margin: 30px auto;
       background: white;
       border-radius: 5px;
-      box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+      box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
       padding: 1rem 2rem 1rem 5rem;
       background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
       background-size: 100% 3rem;
       position: relative;
       line-height: 3rem;
     }
-    
+
     p {
       margin: 0 0 3rem;
     }
@@ -55,7 +118,61 @@
       border: 1px solid;
       border-color: transparent #efe4e4;
     }
+
+    .toolBar {
+      text-align: center;
+      margin: 50px auto;
+    }
+
+    .waves {
+      position: absolute;
+      left: 50%;
+      bottom: 25%;
+      width: 50px;
+      height: 50px;
+      margin-left: -25px;
+      margin-top: -25px;
+      border-radius: 50%;
+    }
+
+    .wave,
+    .waves:before,
+    .waves:after {
+      position: absolute;
+      background: white;
+      margin-left: -12px;
+      margin-top: -12px;
+      width: 50px;
+      height: 50px;
+      content: "";
+      display: block;
+      border-radius: 50%;
+    }
+
+    .waves:before {
+      animation: wave-animate 3s infinite ease-out;
+    }
+
+    .waves:after {
+      opacity: 0;
+      animation: wave-animate 3s 1.5s infinite ease-out;
+    }
+
+    @keyframes wave-animate {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+        transform-origin: center;
+      }
+
+      100% {
+        transform: scale(9);
+        opacity: 0;
+        transform-origin: center;
+      }
+    }
   </style>
 
 </body>
+
 </html>
