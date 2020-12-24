@@ -2,13 +2,15 @@
 
 # JavaScript30
 
-No frameworks, no libraries, no wrappers... just pure VanillaJS ;)
+带上 js、css、html， 无框架、无库 来完成这三十个挑战
 
-Each exercise has its own notes with my thoughts, interesting snippets, ...
-Original files from @wesbos and solutions can be found [here](https://github.com/wesbos/JavaScript30).
-All the images are from [Death To Stock](http://deathtothestockphoto.com/).
+目标是用最小的代价，实现有趣的功能，拓宽自己的知识面
 
-## Table Of Contents
+可以从这里加入挑战以及获取原始文件，[JavaScript30](https://github.com/wesbos/JavaScript30)
+
+链接： [github-page](pl-fe.github.io/javascript30/)
+
+## 目录
 
 1. [x] ~~[用键盘来敲打节奏](./01%20-%20JavaScript%20Drum%20Kit/index-START.html)~~
 2. [x] ~~[流逝的时间，一天过去了多少呢](./02%20-%20JS%20and%20CSS%20Clock/index-START.html)~~
