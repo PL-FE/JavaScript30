@@ -4,7 +4,7 @@
 
 带上 js、css、html， 无框架、无库 来完成这三十个挑战
 
-目标是用最小的代价，实现有趣的功能，拓宽自己的知识面
+最小的代价，实现有趣的功能。很多 `API` 只有自己动手才能发现它不是吗？(**_才能更快证道为人族添加一名无敌~，摊牌了---我是苏宇！_**)
 
 可以从这里加入挑战以及获取原始文件，[JavaScript30](https://github.com/wesbos/JavaScript30)
 
@@ -33,9 +33,9 @@
 19. [ ] ~~[来一个自拍](./19%20-%20Webcam%20Fun/index.html)~~
 20. [x] ~~[有意思的语音识别和文字朗读](./20%20-%20Speech%20Detection/index-START.html)~~
 21. [ ] Geolocat
-22. [ ] ~~[Follow Along Link Highlighter](./22%20-%20Follow%20Along%20Link%20Highlighter/index-FINISHED.html)~~
+22. [x] ~~[Follow Along Link Highlighter](./22%20-%20Follow%20Along%20Link%20Highlighter/index-START.html)~~
 23. [ ] ~~[Speech Synthesis](./23%20-%20Speech%20Synthesis/index-FINISHED.html)~~
-24. [ ] ~~[Sticky Nav](./24%20-%20Sticky%20Nav/index-FINISHED.html)~~
+24. [x] ~~[Sticky Nav](./24%20-%20Sticky%20Nav/index-START.html)~~
 25. [ ] ~~[Event Capture, Propagation, Bubbling, and Once](./25%20-%20Event%20Capture,%20Propagati/index-START.htmlon,%20Bubbling%20and%20Once/index-FINISHED.html)~~
 26. [ ] ~~[Stripe Follow Along Nav](./26%20-%20Stripe%20Follow%20Along%20Nav/index-FINISHED.html)~~
 27. [ ] ~~[Click and Drag](./27%20-%20Click%20and%20Drag/index-FINISHED.html)~~
