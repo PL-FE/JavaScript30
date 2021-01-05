@@ -1,20 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Video Speed Scrubber</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <div class="wrapper">
-    <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" loop controls></video>
+    <video class="flex" width="765" height="430"
+      src="https://raw.githubusercontent.com/PL-FE/wallpapers/master/%E7%94%B7%E5%AD%90%E9%AB%98%E4%B8%AD%E7%94%9F%E7%9A%84%E6%97%A5%E5%B8%B8-01.mp4"
+      loop controls></video>
     <div class="speed">
       <div class="speed-bar">1×</div>
     </div>
   </div>
 
-<script>
-</script>
+  <script>
+    const speed = document.querySelector('.speed')
+    const bar = document.querySelector('.speed-bar')
+    const video = document.querySelector('.flex');
+
+    let isDraw = false
+    speed.addEventListener('mousedown', (e) => {
+      isDraw = true
+    })
+    speed.addEventListener('mouseleave', (e) => {
+      isDraw = false
+    })
+    speed.addEventListener('mouseup', (e) => {
+      isDraw = false
+    })
+    speed.addEventListener('mousemove', (e) => {
+      if (!isDraw) return
+      const y = e.offsetY
+      const min = 0.4;
+      const max = 4;
+
+      const percent = y / speed.clientHeight;
+      const height = Math.round(percent * 100) + '%';
+      bar.style.height = height;
+
+      const playbackRate = percent * (max - min) + min;
+      bar.textContent = playbackRate.toFixed(2) + '×';
+      video.playbackRate = playbackRate;
+    })
+  </script>
 </body>
+
 </html>
