@@ -34,7 +34,7 @@
 20. [x] ~~[有意思的语音识别和文字朗读](./20%20-%20Speech%20Detection/index-START.html)~~
 21. [ ] Geolocat
 22. [x] ~~[关键字跟随](./22%20-%20Follow%20Along%20Link%20Highlighter/index-START.html)~~
-23. [ ] ~~[Speech Synthesis](./23%20-%20Speech%20Synthesis/index-FINISHED.html)~~
+23. [x] ~~[语音合成](./23%20-%20Speech%20Synthesis/index-START.html)~~
 24. [x] ~~[吸顶](./24%20-%20Sticky%20Nav/index-START.html)~~
 25. [x] ~~[事件捕获，传播，冒泡和单次](./25%20-%20Event%20Capture,%20Propagati/index-START.htmlon,%20Bubbling%20and%20Once/index-START.html)~~
 26. [x] ~~[tips](./26%20-%20Stripe%20Follow%20Along%20Nav/index-START.html)~~
