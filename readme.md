@@ -8,7 +8,7 @@
 
 可以从这里加入挑战以及获取原始文件，[JavaScript30](https://github.com/wesbos/JavaScript30)
 
-链接： [github-page](pl-fe.github.io/javascript30/)
+链接： [github-page](https://pl-fe.github.io/JavaScript30/)
 
 ## 目录
 
