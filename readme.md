@@ -41,4 +41,4 @@
 27. [x] ~~[拖拽滚动](./27%20-%20Click%20and%20Drag/index-START.html)~~
 28. [x] ~~[快来三倍速播放](./28%20-%20Video%20Speed%20Controller/index-START.html)~~
 29. [x] ~~[倒计时](./29%20-%20Countdown%20Timer/index.html)~~
-30. [ ] ~~[Whack A Mole](./30%20-%20Whack%20A%20Mole/index-FINISHED.html)~~
+30. [x] ~~[打地鼠小游戏](./30%20-%20Whack%20A%20Mole/index-START.html)~~
